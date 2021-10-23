@@ -70,6 +70,9 @@ VALUES('iPhone 13', 'Purple', 'The latest iPhone', 1200, 'M', 6, 2);
 INSERT INTO Product
 VALUES('Mahogany Table', 'Brown', 'Only the finest handcrafted table', 2500, 'L', 5, 3);
 
+INSERT INTO Product
+VALUES('ASUS Zenbook', 'Black', 'Zenbook is a compact, thin and light lapto from ASUS.', 2500, 'M', 4, 4);
+
 
 INSERT INTO Orders
 VALUES
