@@ -80,6 +80,31 @@ Query 4, find 2 product names that are ordered the most
 */
 
 
+/*
+Create a view that groups product id in pairs if and only if they exist in the same order id.
+Total_times_ordered_tgt stores the number of times these pairs appear in orders
+*/
+CREATE VIEW
+num_times
+AS
+SELECT O1.product_id AS first_prod, O2.product_id AS second_prod, COUNT(*) AS total_times_ordered_tgt
+FROM OrderDetails AS O1, OrderDetails AS O2
+WHERE O1.order_id=O2.order_id
+AND O1.product_id < O2.product_id
+GROUP BY O1.product_id, O2.product_id;
+
+GO
+
+/*
+Select the pair of products = to the max_times
+*/
+SELECT first_prod, second_prod
+FROM num_times
+WHERE total_times_ordered_tgt =(
+SELECT max(total_times_ordered_tgt) as max_times
+FROM num_times);
+
+DROP VIEW num_times
 
 /*
 Query 5, get 3 random customers' emails
