@@ -73,6 +73,9 @@ VALUES('Mahogany Table', 'Brown', 'Only the finest handcrafted table', 2500, 'L'
 INSERT INTO Product
 VALUES('ASUS Zenbook', 'Black', 'Zenbook is a compact, thin and light lapto from ASUS.', 2500, 'M', 4, 4);
 
+INSERT INTO Product
+VALUES('Disposable Chopsticks', 'White', 'Cheap disposable chopsticks.', 1.5, 'S', 3, 3);
+
 
 INSERT INTO Orders
 VALUES
