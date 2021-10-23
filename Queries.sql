@@ -87,3 +87,16 @@ Query 5, get 3 random customers' emails
 SELECT TOP 3 email
 FROM Customer
 ORDER BY NEWID()
+
+/*
+Query 6, Find the average number of days each item takes to ship
+*/
+
+SELECT * FROM Invoice;
+SELECT * FROM Shipment;
+
+
+SELECT product_id, AVG(DATEDIFF(day, invoice_date, ship_date)) AS "AvgDaysToShip"
+FROM Invoice, Shipment
+WHERE Invoice.invoice_num = Shipment.invoice_num
+GROUP BY product_id;
