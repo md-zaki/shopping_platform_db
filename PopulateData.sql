@@ -49,7 +49,8 @@ VALUES
     ('Furniture', NULL),
     ('Smartphones', 4),
     ('Fruits', 1),
-    ('Metallic Cutlery',3);
+    ('Metallic Cutlery',3),
+    ('Red Fruits', 7);
 
 INSERT INTO Restricted
 VALUES
@@ -101,18 +102,18 @@ VALUES
 
 INSERT INTO OrderDetails
 VALUES
-    (1, 1, 1, 'processing', 2, 1.4),
-    (2, 2, 1, 'processing', 1, 1200),
-    (3, 2, 1, 'processing', 1, 1200),
-    (3, 3, 2, 'processing', 1, 2500),
-    (4, 2, 1, 'processing', 1, 1200),
-    (4, 3, 2, 'processing', 1, 2500),
-    (5, 1, 1, 'processing', 1, 1.4),
-    (5, 2, 2, 'processing', 3, 1200),
-    (5, 4, 3, 'processing', 3, 2500),
-    (6, 4, 1, 'processing', 3, 2500),
-    (7, 2, 1, 'processing', 3, 1200),
-    (7, 3, 2, 'processing', 3, 2500);
+    (1, 1, 1, 'processing', 2, 0.60),
+    (2, 2, 1, 'processing', 1, 1150),
+    (3, 2, 1, 'processing', 1, 1150),
+    (3, 3, 2, 'processing', 1, 2200),
+    (4, 2, 1, 'processing', 1, 1150),
+    (4, 3, 2, 'processing', 1, 2200),
+    (5, 1, 1, 'processing', 1, 0.60),
+    (5, 2, 2, 'processing', 3, 1150),
+    (5, 4, 3, 'processing', 3, 2200),
+    (6, 4, 1, 'processing', 3, 2200),
+    (7, 2, 1, 'processing', 3, 1150),
+    (7, 3, 2, 'processing', 3, 2200);
 
 
 
