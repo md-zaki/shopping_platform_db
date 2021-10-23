@@ -42,13 +42,14 @@ VALUES
 
 INSERT INTO ProductType
 VALUES
-    ('Foodstuff', NULL),
+    ('Food', NULL),
     ('Toys', NULL),
     ('Cutlery', NULL),
     ('Electronics', NULL),
     ('Furniture', NULL),
     ('Smartphones', 4),
-    ('Fruits', 1);
+    ('Fruits', 1),
+    ('Metallic Cutlery',3);
 
 INSERT INTO Restricted
 VALUES
@@ -82,7 +83,10 @@ VALUES
     ('2021-10-20', 'processing', 1),
     ('2021-10-20', 'processing', 1),
     ('2021-10-20', 'processing', 2),
-    ('2021-10-20', 'processing', 3);
+    ('2021-10-20', 'processing', 3),
+    ('2021-10-20', 'processing', 4),
+    ('2021-10-20', 'processing', 5),
+    ('2021-10-20', 'processing', 6);
 
 
 INSERT INTO Invoice
@@ -90,7 +94,9 @@ VALUES
     ('2021-10-20', 'issued', 0, 1.4, 0, 1),
     ('2021-10-20', 'issued', 0, 1200, 0, 2),
     ('2021-10-20', 'issued', 0, 3700, 0, 3),
-    ('2021-10-20', 'issued', 0, 1200, 0, 4);
+    ('2021-10-20', 'issued', 0, 1200, 0, 4),
+    ('2021-10-20', 'issued', 0, 1200, 0, 5),
+    ('2021-10-20', 'issued', 0, 1200, 0, 6);
 
 
 INSERT INTO OrderDetails
@@ -99,29 +105,38 @@ VALUES
     (2, 2, 1, 'processing', 1, 1200),
     (3, 2, 1, 'processing', 1, 1200),
     (3, 3, 2, 'processing', 1, 2500),
-    (4, 2, 1, 'processing', 1, 120);
+    (4, 2, 1, 'processing', 1, 1200),
+    (4, 3, 2, 'processing', 1, 2500),
+    (5, 1, 1, 'processing', 1, 1.4),
+    (5, 2, 2, 'processing', 3, 1200),
+    (5, 4, 3, 'processing', 3, 2500),
+    (6, 4, 1, 'processing', 3, 2500),
+    (7, 2, 1, 'processing', 3, 1200),
+    (7, 3, 2, 'processing', 3, 2500);
+
 
 
 /*
 Shipment has to be inserted individually because of trigger limitations
 */
 INSERT INTO Shipment
-VALUES(1, '2021-10-20', 84952, 1);
+VALUES(1, '2021-10-21', 84952, 1);
 
 INSERT INTO Shipment
-VALUES(2, '2021-10-20', 74192, 2);
+VALUES(2, '2021-10-22', 74192, 2);
 
 INSERT INTO Shipment
-VALUES(2, '2021-10-20', 84924, 3);
+VALUES(2, '2021-10-23', 84924, 3);
 
 
 INSERT INTO Shipment
-VALUES(3, '2021-10-20', 84925, 3);
+VALUES(3, '2021-10-24', 84925, 3);
 
 
 /*
 Same as payment, trigger limitations
 */
+/*
 INSERT INTO Payment
 VALUES('2021-10-20', 0.70, 1, 1);
 
@@ -139,6 +154,9 @@ VALUES('2021-10-21', 100, 2, 3);
 
 INSERT INTO Payment
 VALUES('2021-10-22', 1200, 3, 4);
+*/
+INSERT INTO Payment
+VALUES('2021-10-21', 1200, 3, 4);
 
 
 /*

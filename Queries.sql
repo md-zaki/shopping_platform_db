@@ -5,36 +5,22 @@ We use product name since we don't have product id
 DECLARE @cust_email varchar(255)
 SET @cust_email = 'email3.com'
 
-/*
-Get product names that customer has ordered
-*/
-SELECT product_id 
-FROM OrderDetails OD
-WHERE OD.order_id IN (   
-    SELECT order_id
-    FROM Orders
-    WHERE cust_id = (
-        SELECT cust_id
-        FROM Customer
-        WHERE email = @cust_email
-    )
-) 
-/*
-Get product names that aren't shipped for all invoices related to user
-and have been paid either partially or fully
-*/
-AND product_id NOT IN (
-    SELECT product_id
-    FROM Shipment
-    WHERE invoice_num IN (
-        SELECT invoice_num
-        FROM Invoice
-        WHERE order_id = OD.order_id
-        AND amount_paid > 0
-    )
-);
-
-SELECT * FROM OrderDetails, Customer;
+SELECT product_id
+FROM OrderDetails
+WHERE order_id =(SELECT order_id
+		FROM Orders
+		WHERE cust_id =(SELECT cust_id
+				FROM Customer
+				WHERE email = @cust_email))
+AND EXISTS(
+	SELECT invoice_num
+	FROM Invoice
+	WHERE amount_paid > 0
+	AND order_id =(SELECT order_id
+		FROM Orders
+		WHERE cust_id =(SELECT cust_id
+				FROM Customer
+				WHERE email = @cust_email)));
 
 
 /*
@@ -96,7 +82,7 @@ GROUP BY O1.product_id, O2.product_id;
 GO
 
 /*
-Select the pair of products = to the max_times
+Select the pair of products = to the max_times of total_times_ordered_tgt
 */
 SELECT first_prod, second_prod
 FROM num_times
@@ -125,3 +111,18 @@ SELECT product_id, AVG(DATEDIFF(day, invoice_date, ship_date)) AS "AvgDaysToShip
 FROM Invoice, Shipment
 WHERE Invoice.invoice_num = Shipment.invoice_num
 GROUP BY product_id;
+
+/*
+Query 7, Find the total amount saved for each customer
+*/
+
+SELECT o.order_id, o.cust_id, od.product_id, od.qty, od.unit_price,p.price
+FROM orders as o, OrderDetails as od, Product as p
+WHERE o.order_id=od.order_id
+AND od.product_id=p.product_id
+
+SELECT o.cust_id, SUM(p.price-od.unit_price) as total_savings
+FROM orders as o, OrderDetails as od, Product as p
+WHERE o.order_id=od.order_id
+AND od.product_id=p.product_id
+GROUP BY o.cust_id
