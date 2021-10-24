@@ -146,12 +146,23 @@ SELECT * FROM Orders;
 SELECT * FROM OrderDetails;
 SELECT * FROM Shipment;
 
+INSERT INTO Shipment
+VALUES(2,'2021-10-25','89898','4');
 
 
 /*
 Testing Constraint 3 When all products in an order have been shipped, order status change from processing to completed
 */
+SELECT * FROM Invoice;
+SELECT * FROM Orders;
+SELECT * FROM OrderDetails;
+SELECT * FROM Shipment;
 
+INSERT INTO Shipment
+VALUES(2,'2021-10-25','89898',4);
+
+INSERT INTO Shipment
+VALUES(3,'2021-10-25','89899',4);
 
 
 
