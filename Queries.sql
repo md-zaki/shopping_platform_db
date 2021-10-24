@@ -126,3 +126,58 @@ FROM orders as o, OrderDetails as od, Product as p
 WHERE o.order_id=od.order_id
 AND od.product_id=p.product_id
 GROUP BY o.cust_id
+
+/*
+Testing Constraint 1  Invoice status to paid when full payment is made
+*/
+
+SELECT * FROM Payment;
+SELECT * FROM Invoice;
+SELECT * FROM Orders;
+
+INSERT INTO Payment
+VALUES('2021-10-22',1200,1,2);
+
+/*
+Testing Constraint 2 Order Item Shipped, Order status change from processing to ship
+*/
+SELECT * FROM Invoice;
+SELECT * FROM Orders;
+SELECT * FROM OrderDetails;
+SELECT * FROM Shipment;
+
+
+
+/*
+Testing Constraint 3 When all products in an order have been shipped, order status change from processing to completed
+*/
+
+
+
+
+/*
+Testing Constraint 4 There can be at most 3 payments to an invoice
+*/
+SELECT * FROM Payment;
+SELECT * FROM Invoice;
+SELECT * FROM Orders;
+
+INSERT INTO Payment
+VALUES('2021-10-22',1000,2,3); /* First payment */
+
+INSERT INTO Payment
+VALUES('2021-10-23',1000,2,3); /* Second payment */
+
+INSERT INTO Payment
+VALUES('2021-10-24',1000,2,3); /* Third payment NOT FULL*/
+
+
+/*
+Testing Constraint 5 Cannot cancel order if it has been paid, either fully or partially
+*/
+SELECT * FROM Payment;
+SELECT * FROM Invoice;
+SELECT * FROM Orders;
+
+UPDATE Orders SET order_status = 'cancelled' WHERE order_id = 4; /* Fully Paid */
+UPDATE Orders SET order_status = 'cancelled' WHERE order_id = 3; /* Partially Paid */
