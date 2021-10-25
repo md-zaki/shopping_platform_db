@@ -1,4 +1,4 @@
-USE SSP3G5;
+/*USE SSP3G5;*/
 
 DROP TABLE IF EXISTS OrderDetails
 DROP TABLE IF EXISTS Payment
@@ -43,6 +43,16 @@ CREATE TABLE Shop
 );
 
 
+
+CREATE TABLE ProductType
+(
+	p_type_id int NOT NULL IDENTITY(1,1),
+	p_type_description varchar(255) NOT NULL,
+	parent_id int,
+	PRIMARY KEY (p_type_id)
+);
+
+
 CREATE TABLE Product
 (
 	product_id int NOT NULL IDENTITY(1,1),
@@ -54,16 +64,8 @@ CREATE TABLE Product
 	p_type_id int NOT NULL,
 	shop_id int NOT NULL,
 	PRIMARY KEY (product_id),
-	FOREIGN KEY (shop_id) REFERENCES Shop(shop_id) ON UPDATE CASCADE ON DELETE CASCADE
-);
-
-
-CREATE TABLE ProductType
-(
-	p_type_id int NOT NULL IDENTITY(1,1),
-	p_type_description varchar(255) NOT NULL,
-	parent_id int,
-	PRIMARY KEY (p_type_id)
+	FOREIGN KEY (shop_id) REFERENCES Shop(shop_id) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (p_type_id) REFERENCES ProductType(p_type_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 
