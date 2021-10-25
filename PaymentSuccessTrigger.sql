@@ -36,7 +36,7 @@ AS
 	IF ((@payment_amt + @paid_amt) = @total_amt)
 	BEGIN
 		UPDATE Invoice
-		SET invoice_status = 'paid'
+		SET invoice_status = 'paid', is_fully_paid = 1
 		WHERE invoice_num = @invoice_num
 	END
 GO

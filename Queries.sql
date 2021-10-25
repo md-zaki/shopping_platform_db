@@ -1,26 +1,29 @@
 /*
-Query 1, Get product ids not yet shipped by customer email
-We use product name since we don't have product id
+Query 1, Given a customer by an email address, returns the product ids that have been ordered
+and paid by this customer but not yet shipped. 
 */
 DECLARE @cust_email varchar(255)
 SET @cust_email = 'email3.com'
-
 SELECT product_id
 FROM OrderDetails
-WHERE order_id =(SELECT order_id
-		FROM Orders
-		WHERE cust_id =(SELECT cust_id
-				FROM Customer
-				WHERE email = @cust_email))
-AND EXISTS(
-	SELECT invoice_num
-	FROM Invoice
-	WHERE amount_paid > 0
-	AND order_id =(SELECT order_id
-		FROM Orders
-		WHERE cust_id =(SELECT cust_id
-				FROM Customer
-				WHERE email = @cust_email)));
+WHERE order_status <> 'shipped'
+AND order_id IN(
+	SELECT o.order_id
+	FROM Orders AS o, Customer as c
+	WHERE email = @cust_email
+	AND o.cust_id = c.cust_id
+	AND order_status <> 'cancelled')
+AND order_id IN(
+	SELECT o.order_id
+	FROM Invoice i, Orders o
+	WHERE i.order_id = o.order_id
+	AND amount_paid > 0);
+
+SELECT * FROM Payment
+SELECT * FROM Invoice
+SELECT * FROM OrderDetails
+SELECT * FROM Orders
+SELECT * FROM Customer
 
 
 /*
@@ -92,6 +95,9 @@ FROM num_times);
 
 DROP VIEW num_times
 
+SELECT * FROM OrderDetails;
+
+
 /*
 Query 5, get 3 random customers' emails
 */
@@ -100,6 +106,7 @@ FROM Customer
 ORDER BY NEWID()
 
 /*
+OUR OWN QUERY
 Query 6, Find the average number of days each item takes to ship
 */
 
@@ -113,6 +120,7 @@ WHERE Invoice.invoice_num = Shipment.invoice_num
 GROUP BY product_id;
 
 /*
+OUR OWN QUERY
 Query 7, Find the total amount saved for each customer
 */
 
@@ -195,7 +203,7 @@ UPDATE Orders SET order_status = 'cancelled' WHERE order_id = 3; /* Partially Pa
 
 
 /*
-Testing Shop selling products restraints
+Testing Constraint 6 Shop selling products restraints
 */
 SELECT * FROM Restricted;
 SELECT * FROM Product;
