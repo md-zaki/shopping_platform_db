@@ -108,6 +108,7 @@ VALUES
     (3, 3, 2, 'processing', 1, 2200),
     (4, 2, 1, 'processing', 1, 1150),
     (4, 3, 2, 'processing', 1, 2200),
+    (4, 4, 3, 'processing', 1, 2200),
     (5, 1, 1, 'processing', 1, 0.60),
     (5, 2, 2, 'processing', 3, 1150),
     (5, 4, 3, 'processing', 3, 2200),

@@ -33,15 +33,12 @@ Query 2, get top 3 best selling product type ids
 /*
 Order by total qty ordered and only get top 3
 */
-SELECT TOP 3 p_type_id, qty_ordered FROM (
-    /*
-    2 column table with p_type_id and total qty ordered for that id
-    */
-    SELECT p_type_id, SUM(qty) AS qty_ordered
-    FROM Product P
-    LEFT JOIN OrderDetails OD ON OD.product_id = P.product_id
-    GROUP BY p_type_id
-) subquery
+SELECT TOP 3 p_type_id, SUM(qty) AS qty_ordered
+FROM Product P, OrderDetails OD, Invoice I
+WHERE P.product_id = OD.product_id AND
+	OD.order_id = I.order_id AND
+	I.invoice_status = 'paid'
+GROUP BY p_type_id
 ORDER BY qty_ordered DESC
 
 SELECT * FROM Product P JOIN OrderDetails OD ON OD.product_id = P.product_id;
