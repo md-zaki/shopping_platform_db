@@ -192,3 +192,19 @@ SELECT * FROM Orders;
 
 UPDATE Orders SET order_status = 'cancelled' WHERE order_id = 4; /* Fully Paid */
 UPDATE Orders SET order_status = 'cancelled' WHERE order_id = 3; /* Partially Paid */
+
+
+/*
+Testing Shop selling products restraints
+*/
+SELECT * FROM Restricted;
+SELECT * FROM Product;
+SELECT * FROM ProductType;
+/* Test Shop 1, only can sell productType 1 and 7, Food and Fruits */
+/* Shop 1 wants to sell Toys -> Not Allowed */
+INSERT INTO Product
+VALUES('RC Car','Red','Remote Control Car',50,'S',2,1);
+
+/* Shop 1 wants to sell Fruits -> Allowed */
+INSERT INTO Product
+VALUES('Orange','Orange','A fruit orange',0.7,'M',7,1);
