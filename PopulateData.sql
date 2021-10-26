@@ -49,7 +49,7 @@ VALUES
     ('Furniture', NULL),
     ('Smartphones', 4),
     ('Fruits', 1),
-    ('Metallic Cutlery',3),
+    ('Metallic Cutlery', 3),
     ('Red Fruits', 7);
 
 INSERT INTO Restricted
@@ -87,17 +87,29 @@ VALUES
     ('2021-10-20', 'processing', 3),
     ('2021-10-20', 'processing', 4),
     ('2021-10-20', 'processing', 5),
-    ('2021-10-20', 'processing', 6);
+    ('2021-10-20', 'processing', 6),
+    ('2021-10-22', 'processing', 3),
+    ('2021-10-22', 'processing', 3),
+    ('2021-10-22', 'processing', 4),
+    ('2021-10-22', 'processing', 5),
+    ('2021-10-22', 'processing', 5);
 
 
 INSERT INTO Invoice
 VALUES
-    ('2021-10-20', 'issued', 0, 1.4, 0, 1),
-    ('2021-10-20', 'issued', 0, 1200, 0, 2),
-    ('2021-10-20', 'issued', 0, 3700, 0, 3),
-    ('2021-10-20', 'issued', 0, 1200, 0, 4),
-    ('2021-10-20', 'issued', 0, 1200, 0, 5),
-    ('2021-10-20', 'issued', 0, 1200, 0, 6);
+    ('2021-10-20', 'issued', 0, 1.2, 0, 1),
+    ('2021-10-20', 'issued', 0, 1150, 0, 2),
+    ('2021-10-20', 'issued', 0, 3350, 0, 3),
+    ('2021-10-20', 'issued', 0, 5550, 0, 4),
+    ('2021-10-20', 'issued', 0, 3350.60, 0, 5),
+    ('2021-10-20', 'issued', 0, 2200, 0, 6),
+    ('2021-10-20', 'issued', 0, 3350, 0, 7),
+    ('2021-10-22', 'issued', 0, 1200.70, 0, 8),
+    ('2021-10-22', 'issued', 0, 3400, 0, 9),
+    ('2021-10-22', 'issued', 0, 2301.50, 0, 10),
+    ('2021-10-22', 'issued', 0, 2.20, 0, 11),
+    ('2021-10-22', 'issued', 0, 5700, 0, 12);
+
 
 
 INSERT INTO OrderDetails
@@ -114,8 +126,18 @@ VALUES
     (5, 4, 3, 'processing', 3, 2200),
     (6, 4, 1, 'processing', 3, 2200),
     (7, 2, 1, 'processing', 3, 1150),
-    (7, 3, 2, 'processing', 3, 2200);
-
+    (7, 3, 2, 'processing', 3, 2200),
+    (8, 1, 1, 'processing', 1, 0.7),
+    (8, 2, 2, 'processing', 1, 1200),
+    (9, 4, 1, 'processing', 1, 2200),
+    (9, 2, 2, 'processing', 1, 1200),
+    (10, 3, 1, 'processing', 1, 2300),
+    (10, 5, 2, 'processing', 1, 1.5),
+    (11, 1, 1, 'processing', 1, 0.7),
+    (11, 5, 2, 'processing', 1, 1.5),
+    (12, 2, 1, 'processing', 1, 1200),
+    (12, 3, 2, 'processing', 1, 2300),
+    (12, 4, 3, 'processing', 1, 2200);
 
 
 /*
@@ -130,35 +152,56 @@ VALUES(2, '2021-10-22', 74192, 2);
 INSERT INTO Shipment
 VALUES(2, '2021-10-23', 84924, 3);
 
-
 INSERT INTO Shipment
 VALUES(3, '2021-10-24', 84925, 3);
 
+INSERT INTO Shipment
+VALUES(4, '2021-10-26', 85384, 4);
+
+INSERT INTO Shipment
+VALUES(4, '2021-10-26', 85386, 6);
+
+INSERT INTO Shipment
+VALUES(4, '2021-10-26', 85388, 8);
+
+INSERT INTO Shipment
+VALUES(2, '2021-10-26', 85388, 8);
+
+SELECT *
+FROM Invoice;
 
 /*
 Same as payment, trigger limitations
 */
-/*
 INSERT INTO Payment
 VALUES('2021-10-20', 0.70, 1, 1);
-
 INSERT INTO Payment
 VALUES('2021-10-20', 1200, 1, 2);
-
 INSERT INTO Payment
 VALUES('2021-10-21', 2400, 2, 3);
-
 INSERT INTO Payment
 VALUES('2021-10-21', 1200, 2, 3);
-
 INSERT INTO Payment
 VALUES('2021-10-21', 100, 2, 3);
-
-INSERT INTO Payment
-VALUES('2021-10-22', 1200, 3, 4);
-*/
 INSERT INTO Payment
 VALUES('2021-10-21', 1200, 3, 4);
+INSERT INTO Payment
+VALUES('2021-10-22', 1000, 4, 5);
+INSERT INTO Payment
+VALUES('2021-10-22', 1200, 5, 6);
+INSERT INTO Payment
+VALUES('2021-10-22', 3000, 6, 12);
+INSERT INTO Payment
+VALUES('2021-10-22', 1100, 3, 7);
+INSERT INTO Payment
+VALUES('2021-10-22', 3700, 3, 8);
+INSERT INTO Payment
+VALUES('2021-10-22', 2000, 4, 9);
+INSERT INTO Payment
+VALUES('2021-10-22', 2.20, 5, 10);
+INSERT INTO Payment
+VALUES('2021-10-22', 5500, 5, 11);
+
 
 
 /*
